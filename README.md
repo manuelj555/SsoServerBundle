@@ -13,7 +13,7 @@ public function registerBundles()
 {
     $bundles = array(
         ...
-        new Ku\SsoClientBundle\KuSsoServerBundle(),
+        new Ku\SsoServerBundle\KuSsoServerBundle(),
     );
 
     ...
