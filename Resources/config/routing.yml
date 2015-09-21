@@ -1,0 +1,7 @@
+ku_sso_server_login:
+    path:     /login
+    defaults: { _controller: KuSsoServerBundle:Login:login }
+
+ku_sso_server_authenticate:
+    path: /authenticate
+    defaults: { _controller: KuSsoServerBundle:Sso:authenticate }

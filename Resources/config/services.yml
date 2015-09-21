@@ -1,0 +1,40 @@
+services:
+    ku_sso_server.otp_entity_manager:
+        class: Doctrine\ORM\EntityManager
+        factory: [@doctrine, 'getManagerForClass']
+        arguments: ['Ku\SsoServerBundle\Entity\OneTimePassword']
+        public: false;
+
+    ku_sso_server.otp_repository:
+        class: Ku\SsoServerBundle\Entity\OneTimePasswordRepository
+        factory: [@ku_sso_server.otp_entity_manager, 'getRepository']
+        arguments: ['Ku\SsoServerBundle\Entity\OneTimePassword']
+        public: false;
+
+    ku_sso_server.one_time_password_manager:
+        class: Ku\SsoServerBundle\Manager\OneTimePasswordManager
+        arguments:
+            - @ku_sso_server.otp_entity_manager
+            - @ku_sso_server.otp_repository
+            - @event_dispatcher
+
+    ku_sso_server.uri_signer:
+        class: Symfony\Component\HttpKernel\UriSigner
+        arguments:
+            - '12345'
+
+    ku_sso_server.security.otp_authenticator:
+        class: Ku\SsoServerBundle\Security\OneTimePasswordAuthenticator
+        public: false
+        arguments:
+            - @ku_sso_server.one_time_password_manager
+
+    ku_sso_server.security.encrypter:
+        class: Ku\SsoServerBundle\Security\UserDataEncrypter
+        arguments:
+            - null
+
+    ku_sso_server.security.domain_checker:
+        class: Ku\SsoServerBundle\Security\DomainChecker
+        arguments:
+            - null
