@@ -6,10 +6,5 @@
   },
   "autoload": {
     "psr-4": {"Ku\\\\SsoClientBundle\\": ""}
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0-dev"
-    }
   }
 }
