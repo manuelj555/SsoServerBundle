@@ -22,7 +22,7 @@ class LoginController extends Controller
             throw new BadRequestHttpException("Target path not specified");
         }
 
-        if ($this->get('ku_sso_server.security.domain_checker')->isRegistered($targetPath)) {
+        if (!$this->get('ku_sso_server.security.domain_checker')->isRegistered($targetPath)) {
             throw new BadRequestHttpException("Target path is not registered");
         }
 
